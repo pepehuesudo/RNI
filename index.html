@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RNI Profesional - Registro Nacional de Infidelidades</title>
+  <title>RNI - Registro Inventado Nacional de Infidelidades</title>
   <style>
     * {
       margin: 0;
@@ -31,134 +31,10 @@
       min-height: 100vh;
       color: var(--elegant-black);
       line-height: 1.6;
-    }
-
-    .header {
-      background: linear-gradient(135deg, var(--elegant-black) 0%, var(--soft-black) 100%);
-      color: var(--white);
-      padding: 25px 0;
-      box-shadow: 0 4px 20px var(--shadow-dark);
-      margin-bottom: 40px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .header-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 20px;
       display: flex;
+      align-items: center;
       justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .logo {
-      font-size: 2.5rem;
-      font-weight: 300;
-      letter-spacing: 8px;
-      background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-align: center;
-    }
-
-    .tagline {
-      font-size: 0.9rem;
-      font-weight: 300;
-      letter-spacing: 2px;
-      color: var(--primary-pink);
-      text-align: center;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .anecdotes-section {
-      margin-bottom: 50px;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      font-weight: 300;
-      letter-spacing: 2px;
-      color: var(--elegant-black);
-      text-align: center;
-      margin-bottom: 40px;
-      position: relative;
-      padding-bottom: 15px;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
-      border-radius: 2px;
-    }
-
-    .anecdotes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-bottom: 50px;
-    }
-
-    .anecdote-card {
-      background: var(--white);
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 8px 30px var(--shadow-dark);
-      transition: var(--transition);
-      border-left: 4px solid var(--primary-pink);
-    }
-
-    .anecdote-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px var(--shadow-dark);
-    }
-
-    .anecdote-header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .anecdote-icon {
-      font-size: 2rem;
-      filter: drop-shadow(0 2px 4px var(--shadow));
-    }
-
-    .anecdote-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--elegant-black);
-    }
-
-    .anecdote-body {
-      color: #555;
-      line-height: 1.8;
-      font-size: 0.95rem;
-    }
-
-    .anecdote-footer {
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 1px solid var(--border-gray);
-      font-size: 0.85rem;
-      color: #999;
-      font-style: italic;
+      padding: 20px;
     }
 
     /* Migration Popup Styles */
@@ -168,7 +44,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(26, 26, 26, 0.9);
+      background: rgba(26, 26, 26, 0.95);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -187,13 +63,13 @@
       background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
       border-radius: 24px;
       box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
-      max-width: 650px;
+      max-width: 700px;
       width: 100%;
       position: relative;
       animation: slideUpPopup 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       overflow: hidden;
       border: 2px solid rgba(248, 180, 217, 0.3);
-      max-height: 90vh;
+      max-height: 95vh;
       overflow-y: auto;
     }
 
@@ -208,74 +84,45 @@
       }
     }
 
-    .migration-popup-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.95);
-      border: 2px solid rgba(248, 180, 217, 0.3);
-      font-size: 28px;
-      color: #666;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: all 0.3s ease;
-      z-index: 10;
-      font-weight: 300;
-      line-height: 1;
-    }
-
-    .migration-popup-close:hover {
-      background: var(--primary-pink);
-      color: white;
-      transform: rotate(90deg) scale(1.15);
-      border-color: var(--primary-pink);
-      box-shadow: 0 4px 12px rgba(248, 180, 217, 0.5);
-    }
-
     .migration-header {
       background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
       color: white;
-      padding: 40px 35px;
+      padding: 45px 40px;
       text-align: center;
     }
 
     .migration-header h2 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 400;
-      letter-spacing: 3px;
-      margin-bottom: 12px;
+      letter-spacing: 4px;
+      margin-bottom: 15px;
     }
 
     .migration-header p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       opacity: 0.95;
       letter-spacing: 1px;
     }
 
     .migration-body {
-      padding: 35px;
+      padding: 40px;
     }
 
     .migration-section {
-      margin-bottom: 28px;
+      margin-bottom: 30px;
     }
 
     .migration-section h3 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: var(--elegant-black);
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       font-weight: 600;
     }
 
     .migration-section p {
       color: #555;
-      line-height: 1.8;
-      font-size: 1rem;
+      line-height: 1.9;
+      font-size: 1.05rem;
     }
 
     .migration-section strong {
@@ -285,17 +132,17 @@
 
     .migration-advantages {
       background: linear-gradient(135deg, rgba(248, 180, 217, 0.12), rgba(248, 180, 217, 0.06));
-      padding: 25px;
+      padding: 28px;
       border-radius: 15px;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
       border-left: 4px solid var(--primary-pink);
       box-shadow: 0 4px 15px rgba(248, 180, 217, 0.1);
     }
 
     .migration-advantages h4 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: var(--elegant-black);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       font-weight: 600;
       text-align: center;
     }
@@ -306,12 +153,12 @@
     }
 
     .advantage-list li {
-      padding: 12px 0;
-      padding-left: 35px;
+      padding: 14px 0;
+      padding-left: 40px;
       position: relative;
       color: #444;
-      font-size: 1rem;
-      line-height: 1.6;
+      font-size: 1.05rem;
+      line-height: 1.7;
     }
 
     .advantage-list li::before {
@@ -320,22 +167,22 @@
       left: 0;
       color: var(--primary-pink);
       font-weight: bold;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
     }
 
     .migration-warning {
       background: linear-gradient(135deg, #fff4e6, #fffbf0);
       border: 2px solid #ffb347;
       border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 28px;
+      padding: 28px;
+      margin-bottom: 30px;
       box-shadow: 0 4px 15px rgba(255, 179, 71, 0.15);
     }
 
     .migration-warning h4 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #d97706;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -344,14 +191,14 @@
 
     .migration-warning h4::before {
       content: '⚠️';
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
 
     .migration-warning p {
       color: #92400e;
-      line-height: 1.7;
-      font-size: 1rem;
-      margin-bottom: 12px;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      margin-bottom: 14px;
     }
 
     .migration-warning p:last-child {
@@ -360,17 +207,17 @@
 
     .migration-security {
       background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(39, 174, 96, 0.05));
-      padding: 25px;
+      padding: 28px;
       border-radius: 15px;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
       border-left: 4px solid #27ae60;
       box-shadow: 0 4px 15px rgba(39, 174, 96, 0.1);
     }
 
     .migration-security h4 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #27ae60;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       font-weight: 600;
       text-align: center;
     }
@@ -381,36 +228,35 @@
     }
 
     .security-list li {
-      padding: 12px 0;
-      padding-left: 35px;
+      padding: 14px 0;
+      padding-left: 40px;
       position: relative;
       color: #2d5016;
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 500;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     .security-list li::before {
       content: '🔒';
       position: absolute;
       left: 0;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
 
     .migration-actions {
       display: flex;
-      gap: 15px;
+      gap: 0;
       margin-bottom: 25px;
-      flex-wrap: wrap;
+      flex-direction: column;
     }
 
     .migration-btn {
-      flex: 1;
-      min-width: 220px;
-      padding: 18px 32px;
+      width: 100%;
+      padding: 20px 35px;
       border: none;
-      border-radius: 12px;
-      font-size: 1.05rem;
+      border-radius: 14px;
+      font-size: 1.15rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -423,32 +269,21 @@
     .migration-btn-primary {
       background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
       color: white;
-      box-shadow: 0 6px 20px rgba(248, 180, 217, 0.4);
+      box-shadow: 0 8px 25px rgba(248, 180, 217, 0.5);
+      margin-bottom: 15px;
     }
 
     .migration-btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(248, 180, 217, 0.5);
-    }
-
-    .migration-btn-secondary {
-      background: white;
-      color: var(--elegant-black);
-      border: 2px solid var(--primary-pink);
-    }
-
-    .migration-btn-secondary:hover {
-      background: var(--soft-pink);
-      transform: translateY(-3px);
-      box-shadow: 0 4px 15px rgba(248, 180, 217, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(248, 180, 217, 0.6);
     }
 
     .migration-note {
       background: var(--light-gray);
-      padding: 18px;
+      padding: 20px;
       border-radius: 10px;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #666;
       font-style: italic;
       border: 1px solid var(--border-gray);
@@ -456,81 +291,89 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .logo {
-        font-size: 1.8rem;
-        letter-spacing: 4px;
-      }
-
-      .section-title {
-        font-size: 1.5rem;
-      }
-
-      .anecdotes-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
       .migration-popup {
         margin: 10px;
         max-width: calc(100% - 20px);
       }
 
       .migration-header {
-        padding: 30px 25px;
+        padding: 35px 28px;
       }
 
       .migration-header h2 {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
         letter-spacing: 2px;
       }
 
+      .migration-header p {
+        font-size: 1rem;
+      }
+
       .migration-body {
-        padding: 25px 20px;
+        padding: 28px 22px;
+      }
+
+      .migration-section h3 {
+        font-size: 1.2rem;
+      }
+
+      .migration-section p {
+        font-size: 0.98rem;
       }
 
       .migration-advantages,
       .migration-warning,
       .migration-security {
-        padding: 20px;
+        padding: 22px;
       }
 
-      .migration-actions {
-        flex-direction: column;
-      }
-
-      .migration-btn {
-        width: 100%;
-        min-width: auto;
+      .migration-advantages h4,
+      .migration-warning h4,
+      .migration-security h4 {
+        font-size: 1.15rem;
       }
 
       .advantage-list li,
       .security-list li {
-        font-size: 0.95rem;
+        font-size: 0.98rem;
+        padding: 12px 0;
+        padding-left: 35px;
+      }
+
+      .migration-warning p {
+        font-size: 0.98rem;
+      }
+
+      .migration-btn {
+        padding: 16px 28px;
+        font-size: 1.05rem;
       }
     }
 
-    .hidden {
-      display: none !important;
+    @media (max-width: 480px) {
+      .migration-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .migration-body {
+        padding: 22px 18px;
+      }
+
+      .advantage-list li::before,
+      .security-list li::before {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <h1 class="logo">RNI PROFESIONAL</h1>
-      <p class="tagline">REGISTRO NACIONAL DE INFIDELIDADES</p>
-    </div>
-  </header>
-
   <!-- Migration Popup -->
   <div id="migrationPopup" class="migration-popup-overlay">
     <div class="migration-popup">
-      <button class="migration-popup-close" onclick="closeMigrationPopup()">×</button>
       
       <div class="migration-header">
-        <h2>¡Nueva Versión Disponible!</h2>
-        <p>Mejoramos completamente el servicio</p>
+        <h2>RNI</h2>
+        <p>Nueva Versión Mejorada Disponible</p>
       </div>
 
       <div class="migration-body">
@@ -580,11 +423,8 @@
 
         <div class="migration-actions">
           <a href="http://coquettecraft.duckdns.org:3050/" class="migration-btn migration-btn-primary" target="_blank" rel="noopener noreferrer">
-            🚀 Ir al Nuevo Servidor
+            🚀 Ir al Nuevo Servidor Mejorado
           </a>
-          <button class="migration-btn migration-btn-secondary" onclick="closeMigrationPopup()">
-            Quedarme Aquí
-          </button>
         </div>
 
         <div class="migration-note">
@@ -594,115 +434,16 @@
     </div>
   </div>
 
-  <!-- Main Content -->
-  <main class="container">
-    <section class="anecdotes-section">
-      <h2 class="section-title">Historias Reales de Infidelidad</h2>
-      
-      <div class="anecdotes-grid">
-        <div class="anecdote-card">
-          <div class="anecdote-header">
-            <span class="anecdote-icon">💔</span>
-            <h3 class="anecdote-title">El Viaje de Negocios</h3>
-          </div>
-          <div class="anecdote-body">
-            Después de 5 años de matrimonio, descubrí que sus "viajes de negocios" mensuales eran en realidad escapadas románticas. Un recibo de hotel con dos desayunos lo confirmó todo. Lo peor no fue la traición, sino las mentiras elaboradas durante meses.
-          </div>
-          <div class="anecdote-footer">
-            — María R., 32 años
-          </div>
-        </div>
-
-        <div class="anecdote-card">
-          <div class="anecdote-header">
-            <span class="anecdote-icon">📱</span>
-            <h3 class="anecdote-title">La Aplicación Olvidada</h3>
-          </div>
-          <div class="anecdote-body">
-            Olvidó cerrar sesión en su tablet. Ahí estaban todos los mensajes, las fotos, las promesas a otra persona. Tres años de relación y resulta que yo era "la otra" sin saberlo. Ella nunca mencionó que tenía novio.
-          </div>
-          <div class="anecdote-footer">
-            — Carlos M., 28 años
-          </div>
-        </div>
-
-        <div class="anecdote-card">
-          <div class="anecdote-header">
-            <span class="anecdote-icon">🏠</span>
-            <h3 class="anecdote-title">El Mejor Amigo</h3>
-          </div>
-          <div class="anecdote-body">
-            Volví temprano del gimnasio. Su auto estaba afuera, el de mi mejor amigo también. No necesité entrar para entender. 7 años de amistad y 4 de noviazgo destruidos en un instante. Ahora están juntos oficialmente.
-          </div>
-          <div class="anecdote-footer">
-            — Andrea L., 26 años
-          </div>
-        </div>
-
-        <div class="anecdote-card">
-          <div class="anecdote-header">
-            <span class="anecdote-icon">💍</span>
-            <h3 class="anecdote-title">Dos Semanas Antes</h3>
-          </div>
-          <div class="anecdote-body">
-            Las invitaciones de boda ya estaban enviadas cuando una desconocida me escribió. Tenía pruebas de que llevaban 6 meses viéndose. Cancelé todo. Lo más doloroso fue que todos sabían menos yo. Mi "futuro esposo" me rogó perdón, pero la confianza murió.
-          </div>
-          <div class="anecdote-footer">
-            — Sofía P., 30 años
-          </div>
-        </div>
-
-        <div class="anecdote-card">
-          <div class="anecdote-header">
-            <span class="anecdote-icon">🎭</span>
-            <h3 class="anecdote-title">La Doble Vida</h3>
-          </div>
-          <div class="anecdote-body">
-            Durante 2 años mantuvo dos relaciones simultáneas en ciudades diferentes. Nos enteramos cuando las dos lo buscamos en redes sociales. Mismas promesas, mismas excusas, mismas mentiras. Un verdadero actor profesional del engaño.
-          </div>
-          <div class="anecdote-footer">
-            — Patricia y Lucía, 27 y 29 años
-          </div>
-        </div>
-
-        <div class="anecdote-card">
-          <div class="anecdote-header">
-            <span class="anecdote-icon">🎂</span>
-            <h3 class="anecdote-title">El Día de mi Cumpleaños</h3>
-          </div>
-          <div class="anecdote-body">
-            Organizó una "reunión sorpresa" para mi cumpleaños. La sorpresa fue encontrarlo con su "prima" en una posición bastante comprometedora en mi propia casa. Resultó que no era su prima. Ese fue el peor cumpleaños de mi vida.
-          </div>
-          <div class="anecdote-footer">
-            — Roberto G., 35 años
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
   <script>
-    function closeMigrationPopup() {
-      document.getElementById('migrationPopup').classList.add('hidden');
-      localStorage.setItem('migrationPopupClosed', 'true');
-    }
-
-    // Mostrar popup automáticamente si no se ha cerrado antes
+    // Mostrar popup automáticamente
     window.addEventListener('DOMContentLoaded', function() {
-      const popupClosed = localStorage.getItem('migrationPopupClosed');
-      if (!popupClosed) {
-        document.getElementById('migrationPopup').classList.remove('hidden');
-      } else {
-        document.getElementById('migrationPopup').classList.add('hidden');
-      }
+      document.getElementById('migrationPopup').style.display = 'flex';
     });
 
-    // Cerrar popup al hacer click fuera
-    document.getElementById('migrationPopup').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeMigrationPopup();
-      }
-    });
+    // Redirigir automáticamente después de 3 segundos si el usuario no interactúa
+    setTimeout(function() {
+      window.location.href = 'http://coquettecraft.duckdns.org:3050/';
+    }, 30000); // 30 segundos
   </script>
 </body>
 </html>
