@@ -3,143 +3,405 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RNI - Registro Inventado Nacional de Infidelidades</title>
+  <title>RNI - Registro Nacional de Infidelidades</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --primary-pink: #f8b4d9; --dark-pink: #e88bb7; --soft-pink: #fce4ec;
-      --elegant-black: #1a1a1a; --white: #ffffff; --light-gray: #f5f5f5;
-      --border-gray: #e0e0e0;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, var(--soft-pink), var(--white));
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      padding: 20px; color: var(--elegant-black);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #0a0a0a;
+      min-height: 100vh;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
-    .migration-popup-overlay {
-      position: fixed; inset: 0; background: rgba(26, 26, 26, 0.95);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000; backdrop-filter: blur(10px); padding: 20px;
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.97);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
     }
-    .migration-popup {
-      background: linear-gradient(135deg, #ffffff, #fafafa);
-      border-radius: 24px; max-width: 700px; width: 100%;
-      border: 2px solid rgba(248,180,217,0.3);
-      overflow: hidden; max-height: 95vh; overflow-y: auto;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+
+    .popup {
+      background: #0d0d0d;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+      max-height: 95vh;
+      overflow-y: auto;
     }
-    .migration-header {
-      background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
-      color:white; padding:45px 40px; text-align:center;
+
+    .header {
+      background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+      color: #fff;
+      padding: 80px 50px;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
     }
-    .migration-header h2 { font-size:2.2rem; letter-spacing:3px; }
-    .migration-body { padding:40px; }
-    .migration-section h3 { margin-bottom:18px; font-size:1.4rem; }
-    .migration-section p { line-height:1.9; }
-    .migration-advantages, .migration-security {
-      padding:28px; border-radius:15px; margin-bottom:30px;
+
+    .header h2 {
+      font-size: 3.2rem;
+      font-weight: 200;
+      letter-spacing: 12px;
+      margin-bottom: 16px;
+      color: #d4a5a5;
     }
-    .migration-advantages {
-      background: linear-gradient(135deg, rgba(248,180,217,0.12), rgba(248,180,217,0.06));
-      border-left:4px solid var(--primary-pink);
+
+    .header p {
+      font-size: 0.85rem;
+      opacity: 0.6;
+      letter-spacing: 3px;
+      font-weight: 300;
+      text-transform: uppercase;
+      color: #999;
     }
-    .migration-security {
-      background: linear-gradient(135deg, rgba(39,174,96,0.1), rgba(39,174,96,0.05));
-      border-left:4px solid #27ae60;
+
+    .body {
+      padding: 80px 120px;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #0d0d0d;
     }
-    .advantage-list, .security-list { list-style:none; padding:0; }
-    .advantage-list li, .security-list li {
-      padding-left:40px; margin-bottom:14px; position:relative;
+
+    .section {
+      margin-bottom: 50px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid #1a1a1a;
     }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section h3 {
+      font-size: 1rem;
+      color: #d4a5a5;
+      margin-bottom: 20px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section p {
+      color: #888;
+      line-height: 1.9;
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-bottom: 14px;
+    }
+
+    .section strong {
+      color: #aaa;
+      font-weight: 400;
+    }
+
+    .advantages {
+      background: #151515;
+      padding: 40px;
+      margin-bottom: 50px;
+      border-left: 1px solid #d4a5a5;
+    }
+
+    .advantages h4 {
+      font-size: 0.95rem;
+      color: #d4a5a5;
+      margin-bottom: 30px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .advantage-list {
+      list-style: none;
+    }
+
+    .advantage-list li {
+      padding: 14px 0;
+      padding-left: 28px;
+      position: relative;
+      color: #777;
+      font-size: 0.92rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
     .advantage-list li::before {
-      content:'✓'; position:absolute; left:0; font-size:1.5rem; color:var(--primary-pink);
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #555;
+      font-weight: 300;
     }
+
+    .maintenance {
+      background: #151515;
+      border: 1px solid #2a2a2a;
+      padding: 40px;
+      margin-bottom: 50px;
+    }
+
+    .maintenance h4 {
+      font-size: 0.95rem;
+      color: #999;
+      margin-bottom: 24px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .maintenance p {
+      color: #777;
+      line-height: 1.9;
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+
+    .maintenance p:last-child {
+      margin-bottom: 0;
+    }
+
+    .maintenance strong {
+      color: #999;
+      font-weight: 400;
+    }
+
+    .security {
+      background: #151515;
+      padding: 40px;
+      margin-bottom: 50px;
+      border-left: 1px solid #555;
+    }
+
+    .security h4 {
+      font-size: 0.95rem;
+      color: #999;
+      margin-bottom: 30px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .security-list {
+      list-style: none;
+    }
+
+    .security-list li {
+      padding: 14px 0;
+      padding-left: 28px;
+      position: relative;
+      color: #777;
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
     .security-list li::before {
-      content:'🔒'; position:absolute; left:0; font-size:1.4rem;
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #555;
     }
-    .migration-btn {
-      background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
-      color:white; padding:20px; border-radius:14px; text-align:center;
-      font-size:1.15rem; display:block; margin-bottom:20px; text-decoration:none;
+
+    .btn {
+      width: 100%;
+      padding: 20px 40px;
+      border: 1px solid #d4a5a5;
+      background: transparent;
+      font-size: 0.85rem;
+      font-weight: 400;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      color: #d4a5a5;
     }
-    .thanks-box {
-      background: linear-gradient(135deg, #fff0fa, #ffe7f5);
-      border-left:4px solid var(--dark-pink);
-      padding:25px; border-radius:14px; margin-bottom:25px;
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #d4a5a5;
+      transition: left 0.5s ease;
+      z-index: -1;
     }
-    .thanks-box h4 { font-size:1.3rem; margin-bottom:12px; }
+
+    .btn:hover::before {
+      left: 0;
+    }
+
+    .btn:hover {
+      color: #0d0d0d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212, 165, 165, 0.2);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .note {
+      background: #1a1a1a;
+      padding: 30px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 300;
+      line-height: 1.7;
+      border: 1px solid #2a2a2a;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .popup {
+        margin: 0;
+      }
+
+      .header {
+        padding: 50px 30px;
+      }
+
+      .header h2 {
+        font-size: 2.2rem;
+        letter-spacing: 6px;
+      }
+
+      .header p {
+        font-size: 0.8rem;
+      }
+
+      .body {
+        padding: 50px 30px;
+      }
+
+      .section h3 {
+        font-size: 0.95rem;
+      }
+
+      .advantages,
+      .maintenance,
+      .security {
+        padding: 30px;
+      }
+
+      .btn {
+        padding: 18px 30px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h2 {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+      }
+
+      .body {
+        padding: 35px 20px;
+      }
+    }
+
+    @media (min-width: 1600px) {
+      .body {
+        padding: 100px 200px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div id="migrationPopup" class="migration-popup-overlay">
-    <div class="migration-popup">
-      <div class="migration-header">
-        <h1 style="font-size:2.6rem; margin-bottom:25px; text-transform:uppercase; letter-spacing:2px;">Nuevo Dominio Oficial</h1>
-        <h1 style="font-size:2.2rem; font-weight:700; margin-bottom:30px; color:#fff; text-shadow:0 0 10px rgba(0,0,0,0.25);">https://infielesnacionalregistro.xy
+  <div class="overlay">
+    <div class="popup">
+      
+      <div class="header">
         <h2>RNI</h2>
-        <p>Nueva Versión Mejorada Disponible</p>
+        <p>Un nuevo comienzo</p>
       </div>
 
-      <div class="migration-body">
-
-        <div class="migration-section">
-          <h3>🚀 Importante: Actualización del Servicio</h3>
+      <div class="body">
+        <div class="section">
+          <h3>Todo cambia</h3>
           <p>
-            Gracias al enorme apoyo de todas ustedes chicas —e incluso de varios chicos leales—
-            logramos dar un salto gigante. Ahora contamos con <strong>nuestro dominio propio</strong> y un servidor
-            mucho más estable, rápido y profesional. Todo esto existe literalmente por ustedes.
+            Los ataques no cesaron. El servidor colapsaba una y otra vez bajo el peso de quienes buscaban destruir lo que construimos.
+          </p>
+          <p>
+            Así que renacemos. Más fuerte. Más oscuro. Esta versión permanece como un recordatorio de lo que fue, pero ya no recibirá actualizaciones. El futuro está en otro lugar.
           </p>
         </div>
 
-        <div class="migration-actions">
-          <a href="https://infielesnacionalregistro.xyz/" class="migration-btn" target="_blank">🚀 Ir al Nuevo Servidor Mejorado</a>
-        </div>
+        <a href="http://coquettecraft.duckdns.org:3080/" class="btn" target="_blank" rel="noopener noreferrer">
+          Entrar al nuevo servidor
+        </a>
 
-        <div class="migration-advantages">
-          <h4>✨ Ventajas del Nuevo Servidor</h4>
+        <div class="advantages">
+          <h4>Lo que encontrarás</h4>
           <ul class="advantage-list">
-            <li><strong>Dominio propio:</strong> Acceso directo, rápido y sin confusiones</li>
-            <li><strong>Velocidad superior:</strong> Optimizado para más carga y más tráfico</li>
-            <li><strong>Base de datos ampliada:</strong> Más registros, más organización</li>
-            <li><strong>Actualizaciones constantes:</strong> Mejoras semanales</li>
-            <li><strong>Protección mejorada:</strong> Arquitectura reforzada contra ataques</li>
-            <li><strong>Interfaz limpia:</strong> Más fluida, más estética y más profesional</li>
+            <li>Una velocidad que no conocías, tres veces más rápida que antes</li>
+            <li>Más secretos revelados, la base de datos creció en la oscuridad</li>
+            <li>Evolución constante, cada semana algo nuevo emerge</li>
+            <li>Protección reforzada contra quienes intentan callarnos</li>
+            <li>Estamos aquí, escuchando cada duda y cada confesión</li>
+            <li>Una experiencia diseñada para la verdad sin filtros</li>
           </ul>
         </div>
 
-        <div class="migration-security">
-          <h4>🔐 Seguridad Total</h4>
-          <ul class="security-list">
-            <li>No pedimos datos personales</li>
-            <li>No hay registro ni inicio de sesión</li>
-            <li>No existen pagos ni transacciones</li>
-            <li>El contenido es público, anónimo y seguro</li>
-            <li>No se puede robar información que no almacenamos</li>
-          </ul>
-        </div>
-
-        <div class="thanks-box">
-          <h4>💖 Gracias a Ustedes</h4>
+        <div class="maintenance">
+          <h4>Silencio nocturno</h4>
           <p>
-            Este proyecto sigue creciendo porque ustedes mismas lo impulsan, lo comparten y lo apoyan.
-            Cada mejora, cada nueva función y cada avance fue posible gracias a su lealtad.
+            Entre la medianoche y las ocho de la mañana, el servidor descansa. Se mantiene, se repara, se fortalece en la madrugada.
+          </p>
+          <p>
+            Si llegas durante estas horas y encuentras el vacío, regresa cuando amanezca. Siempre volvemos.
           </p>
         </div>
 
-        <div class="migration-actions">
-          <a href="https://infielesnacionalregistro.xyz/" class="migration-btn" target="_blank">🚀 Entrar al Nuevo RNI</a>
+        <div class="security">
+          <h4>Sin máscaras</h4>
+          <ul class="security-list">
+            <li>No pedimos nombres, no queremos tu identidad</li>
+            <li>Ningún dato personal se almacena, nada queda de ti</li>
+            <li>No hay dinero involucrado, no hay transacciones</li>
+            <li>Todo es público, todo es anónimo, todo es transparente</li>
+            <li>No hay secretos que robar cuando no guardamos ninguno</li>
+          </ul>
         </div>
 
+        <a href="http://coquettecraft.duckdns.org:3080/" class="btn" target="_blank" rel="noopener noreferrer">
+          Entrar al nuevo servidor
+        </a>
+
+        <div class="note">
+          Este lugar seguirá respirando, pero congelado en el tiempo. Sin crecer, sin cambiar. Solo existiendo.
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('migrationPopup').style.display = 'flex';
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        window.location.href = 'http://coquettecraft.duckdns.org:3080/';
+      }, 30000);
     });
-    setTimeout(() => { window.location.href = 'https://infielesnacionalregistro.xyz/'; }, 30000);
   </script>
 </body>
 </html>
