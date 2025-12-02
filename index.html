@@ -5,449 +5,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RNI - Registro Inventado Nacional de Infidelidades</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --primary-pink: #f8b4d9;
-      --dark-pink: #e88bb7;
-      --soft-pink: #fce4ec;
-      --elegant-black: #1a1a1a;
-      --soft-black: #2d2d2d;
-      --white: #ffffff;
-      --light-gray: #f5f5f5;
+      --primary-pink: #f8b4d9; --dark-pink: #e88bb7; --soft-pink: #fce4ec;
+      --elegant-black: #1a1a1a; --white: #ffffff; --light-gray: #f5f5f5;
       --border-gray: #e0e0e0;
-      --shadow: rgba(232, 139, 183, 0.15);
-      --shadow-dark: rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
     }
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, var(--soft-pink) 0%, var(--white) 100%);
-      min-height: 100vh;
-      color: var(--elegant-black);
-      line-height: 1.6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      background: linear-gradient(135deg, var(--soft-pink), var(--white));
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 20px; color: var(--elegant-black);
     }
-
-    /* Migration Popup Styles */
     .migration-popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(26, 26, 26, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      animation: fadeInOverlay 0.3s ease;
-      backdrop-filter: blur(10px);
-      padding: 20px;
+      position: fixed; inset: 0; background: rgba(26, 26, 26, 0.95);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10000; backdrop-filter: blur(10px); padding: 20px;
     }
-
-    @keyframes fadeInOverlay {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
     .migration-popup {
-      background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-      border-radius: 24px;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
-      max-width: 700px;
-      width: 100%;
-      position: relative;
-      animation: slideUpPopup 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      overflow: hidden;
-      border: 2px solid rgba(248, 180, 217, 0.3);
-      max-height: 95vh;
-      overflow-y: auto;
+      background: linear-gradient(135deg, #ffffff, #fafafa);
+      border-radius: 24px; max-width: 700px; width: 100%;
+      border: 2px solid rgba(248,180,217,0.3);
+      overflow: hidden; max-height: 95vh; overflow-y: auto;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.4);
     }
-
-    @keyframes slideUpPopup {
-      from {
-        transform: translateY(50px) scale(0.9);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-    }
-
     .migration-header {
       background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
-      color: white;
-      padding: 45px 40px;
-      text-align: center;
+      color:white; padding:45px 40px; text-align:center;
     }
-
-    .migration-header h2 {
-      font-size: 2.2rem;
-      font-weight: 400;
-      letter-spacing: 4px;
-      margin-bottom: 15px;
+    .migration-header h2 { font-size:2.2rem; letter-spacing:3px; }
+    .migration-body { padding:40px; }
+    .migration-section h3 { margin-bottom:18px; font-size:1.4rem; }
+    .migration-section p { line-height:1.9; }
+    .migration-advantages, .migration-security {
+      padding:28px; border-radius:15px; margin-bottom:30px;
     }
-
-    .migration-header p {
-      font-size: 1.1rem;
-      opacity: 0.95;
-      letter-spacing: 1px;
-    }
-
-    .migration-body {
-      padding: 40px;
-    }
-
-    .migration-section {
-      margin-bottom: 30px;
-    }
-
-    .migration-section h3 {
-      font-size: 1.4rem;
-      color: var(--elegant-black);
-      margin-bottom: 18px;
-      font-weight: 600;
-    }
-
-    .migration-section p {
-      color: #555;
-      line-height: 1.9;
-      font-size: 1.05rem;
-    }
-
-    .migration-section strong {
-      color: var(--elegant-black);
-      font-weight: 600;
-    }
-
     .migration-advantages {
-      background: linear-gradient(135deg, rgba(248, 180, 217, 0.12), rgba(248, 180, 217, 0.06));
-      padding: 28px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      border-left: 4px solid var(--primary-pink);
-      box-shadow: 0 4px 15px rgba(248, 180, 217, 0.1);
+      background: linear-gradient(135deg, rgba(248,180,217,0.12), rgba(248,180,217,0.06));
+      border-left:4px solid var(--primary-pink);
     }
-
-    .migration-advantages h4 {
-      font-size: 1.3rem;
-      color: var(--elegant-black);
-      margin-bottom: 20px;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    .advantage-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .advantage-list li {
-      padding: 14px 0;
-      padding-left: 40px;
-      position: relative;
-      color: #444;
-      font-size: 1.05rem;
-      line-height: 1.7;
-    }
-
-    .advantage-list li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--primary-pink);
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
-
-    .migration-warning {
-      background: linear-gradient(135deg, #fff4e6, #fffbf0);
-      border: 2px solid #ffb347;
-      border-radius: 15px;
-      padding: 28px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 15px rgba(255, 179, 71, 0.15);
-    }
-
-    .migration-warning h4 {
-      font-size: 1.3rem;
-      color: #d97706;
-      margin-bottom: 18px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .migration-warning h4::before {
-      content: '⚠️';
-      font-size: 1.6rem;
-    }
-
-    .migration-warning p {
-      color: #92400e;
-      line-height: 1.8;
-      font-size: 1.05rem;
-      margin-bottom: 14px;
-    }
-
-    .migration-warning p:last-child {
-      margin-bottom: 0;
-    }
-
     .migration-security {
-      background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(39, 174, 96, 0.05));
-      padding: 28px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      border-left: 4px solid #27ae60;
-      box-shadow: 0 4px 15px rgba(39, 174, 96, 0.1);
+      background: linear-gradient(135deg, rgba(39,174,96,0.1), rgba(39,174,96,0.05));
+      border-left:4px solid #27ae60;
     }
-
-    .migration-security h4 {
-      font-size: 1.3rem;
-      color: #27ae60;
-      margin-bottom: 20px;
-      font-weight: 600;
-      text-align: center;
+    .advantage-list, .security-list { list-style:none; padding:0; }
+    .advantage-list li, .security-list li {
+      padding-left:40px; margin-bottom:14px; position:relative;
     }
-
-    .security-list {
-      list-style: none;
-      padding: 0;
+    .advantage-list li::before {
+      content:'✓'; position:absolute; left:0; font-size:1.5rem; color:var(--primary-pink);
     }
-
-    .security-list li {
-      padding: 14px 0;
-      padding-left: 40px;
-      position: relative;
-      color: #2d5016;
-      font-size: 1.05rem;
-      font-weight: 500;
-      line-height: 1.7;
-    }
-
     .security-list li::before {
-      content: '🔒';
-      position: absolute;
-      left: 0;
-      font-size: 1.4rem;
+      content:'🔒'; position:absolute; left:0; font-size:1.4rem;
     }
-
-    .migration-actions {
-      display: flex;
-      gap: 0;
-      margin-bottom: 25px;
-      flex-direction: column;
-    }
-
     .migration-btn {
-      width: 100%;
-      padding: 20px 35px;
-      border: none;
-      border-radius: 14px;
-      font-size: 1.15rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      letter-spacing: 0.5px;
-    }
-
-    .migration-btn-primary {
       background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
-      color: white;
-      box-shadow: 0 8px 25px rgba(248, 180, 217, 0.5);
-      margin-bottom: 15px;
+      color:white; padding:20px; border-radius:14px; text-align:center;
+      font-size:1.15rem; display:block; margin-bottom:20px; text-decoration:none;
     }
-
-    .migration-btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 35px rgba(248, 180, 217, 0.6);
+    .thanks-box {
+      background: linear-gradient(135deg, #fff0fa, #ffe7f5);
+      border-left:4px solid var(--dark-pink);
+      padding:25px; border-radius:14px; margin-bottom:25px;
     }
-
-    .migration-note {
-      background: var(--light-gray);
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 0.95rem;
-      color: #666;
-      font-style: italic;
-      border: 1px solid var(--border-gray);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .migration-popup {
-        margin: 10px;
-        max-width: calc(100% - 20px);
-      }
-
-      .migration-header {
-        padding: 35px 28px;
-      }
-
-      .migration-header h2 {
-        font-size: 1.7rem;
-        letter-spacing: 2px;
-      }
-
-      .migration-header p {
-        font-size: 1rem;
-      }
-
-      .migration-body {
-        padding: 28px 22px;
-      }
-
-      .migration-section h3 {
-        font-size: 1.2rem;
-      }
-
-      .migration-section p {
-        font-size: 0.98rem;
-      }
-
-      .migration-advantages,
-      .migration-warning,
-      .migration-security {
-        padding: 22px;
-      }
-
-      .migration-advantages h4,
-      .migration-warning h4,
-      .migration-security h4 {
-        font-size: 1.15rem;
-      }
-
-      .advantage-list li,
-      .security-list li {
-        font-size: 0.98rem;
-        padding: 12px 0;
-        padding-left: 35px;
-      }
-
-      .migration-warning p {
-        font-size: 0.98rem;
-      }
-
-      .migration-btn {
-        padding: 16px 28px;
-        font-size: 1.05rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .migration-header h2 {
-        font-size: 1.5rem;
-      }
-
-      .migration-body {
-        padding: 22px 18px;
-      }
-
-      .advantage-list li::before,
-      .security-list li::before {
-        font-size: 1.2rem;
-      }
-    }
+    .thanks-box h4 { font-size:1.3rem; margin-bottom:12px; }
   </style>
 </head>
 <body>
-  <!-- Migration Popup -->
   <div id="migrationPopup" class="migration-popup-overlay">
     <div class="migration-popup">
-      
       <div class="migration-header">
         <h2>RNI</h2>
         <p>Nueva Versión Mejorada Disponible</p>
       </div>
 
       <div class="migration-body">
+
         <div class="migration-section">
-          <h3>🚀 Importante: Cambios en el Servicio</h3>
+          <h3>🚀 Importante: Actualización del Servicio</h3>
           <p>
-            Debido a ataques constantes y saturación del servidor, hemos preparado una nueva versión mucho más robusta y rápida.
-            <strong>Esta versión no recibirá más actualizaciones</strong>, pero permanecerá disponible para quienes la prefieran.
+            Gracias al enorme apoyo de todas ustedes chicas —e incluso de varios chicos leales—
+            logramos dar un salto gigante. Ahora contamos con <strong>nuestro dominio propio</strong> y un servidor
+            mucho más estable, rápido y profesional. Todo esto existe literalmente por ustedes.
           </p>
         </div>
+
         <div class="migration-actions">
-          <a href="http://coquettecraft.duckdns.org:3080/" class="migration-btn migration-btn-primary" target="_blank" rel="noopener noreferrer">
-            🚀 Ir al Nuevo Servidor Mejorado
-          </a>
+          <a href="https://tudominio.com/" class="migration-btn" target="_blank">🚀 Ir al Nuevo Servidor Mejorado</a>
         </div>
+
         <div class="migration-advantages">
           <h4>✨ Ventajas del Nuevo Servidor</h4>
           <ul class="advantage-list">
-            <li><strong>Velocidad superior:</strong> Carga hasta 3 veces más rápida</li>
-            <li><strong>Base de datos ampliada:</strong> Muchos más registros disponibles</li>
-            <li><strong>Actualizaciones constantes:</strong> Nuevas funciones cada semana</li>
-            <li><strong>Mayor protección:</strong> Sistema anti-ataques mejorado</li>
-            <li><strong>Soporte activo:</strong> Respondemos tus dudas y sugerencias</li>
-            <li><strong>Mejor experiencia:</strong> Interfaz optimizada y más fluida</li>
+            <li><strong>Dominio propio:</strong> Acceso directo, rápido y sin confusiones</li>
+            <li><strong>Velocidad superior:</strong> Optimizado para más carga y más tráfico</li>
+            <li><strong>Base de datos ampliada:</strong> Más registros, más organización</li>
+            <li><strong>Actualizaciones constantes:</strong> Mejoras semanales</li>
+            <li><strong>Protección mejorada:</strong> Arquitectura reforzada contra ataques</li>
+            <li><strong>Interfaz limpia:</strong> Más fluida, más estética y más profesional</li>
           </ul>
-        </div>
-
-        <div class="migration-warning">
-          <h4>Tu Navegador Dirá "No es Seguro"</h4>
-          <p>
-            <strong>Esto es completamente normal.</strong> El navegador mostrará una advertencia porque el sitio no tiene certificado HTTPS (cuesta dinero mantenerlo).
-          </p>
-          <p>
-            Para continuar, haz clic en <strong>"Avanzado"</strong> o <strong>"Más información"</strong> y luego en <strong>"Continuar al sitio"</strong> o <strong>"Aceptar el riesgo"</strong>.
-          </p>
-          <p>
-            <strong>¿Por qué no tiene HTTPS?</strong> Para poder mantener el servidor gratuito y con nuestro propio financiamiento sin depender de terceros.
-          </p>
         </div>
 
         <div class="migration-security">
-          <h4>🔐 ¿Es Realmente Seguro?</h4>
+          <h4>🔐 Seguridad Total</h4>
           <ul class="security-list">
-            <li>No requiere registro ni inicio de sesión</li>
-            <li>No pedimos datos personales de ningún tipo</li>
-            <li>No hay transacciones ni pagos</li>
-            <li>Todo el contenido es público y anónimo</li>
-            <li>Imposible que roben información que no existe</li>
+            <li>No pedimos datos personales</li>
+            <li>No hay registro ni inicio de sesión</li>
+            <li>No existen pagos ni transacciones</li>
+            <li>El contenido es público, anónimo y seguro</li>
+            <li>No se puede robar información que no almacenamos</li>
           </ul>
         </div>
 
-        <div class="migration-actions">
-          <a href="http://coquettecraft.duckdns.org:3080/" class="migration-btn migration-btn-primary" target="_blank" rel="noopener noreferrer">
-            🚀 Ir al Nuevo Servidor Mejorado
-          </a>
+        <div class="thanks-box">
+          <h4>💖 Gracias a Ustedes</h4>
+          <p>
+            Este proyecto sigue creciendo porque ustedes mismas lo impulsan, lo comparten y lo apoyan.
+            Cada mejora, cada nueva función y cada avance fue posible gracias a su lealtad.
+          </p>
         </div>
 
-        <div class="migration-note">
-          💡 Esta versión seguirá funcionando sin problemas, pero no tendrá nuevas funciones ni actualizaciones.
+        <div class="migration-actions">
+          <a href="https://tudominio.com/" class="migration-btn" target="_blank">🚀 Entrar al Nuevo RNI</a>
         </div>
+
       </div>
     </div>
   </div>
 
   <script>
-    // Mostrar popup automáticamente
-    window.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('migrationPopup').style.display = 'flex';
     });
-
-    // Redirigir automáticamente después de 3 segundos si el usuario no interactúa
-    setTimeout(function() {
-      window.location.href = 'http://coquettecraft.duckdns.org:3080/';
-    }, 30000); // 30 segundos
+    setTimeout(() => { window.location.href = 'https://tudominio.com/'; }, 30000);
   </script>
 </body>
 </html>
